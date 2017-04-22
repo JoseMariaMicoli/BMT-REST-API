@@ -43,6 +43,13 @@ public class UserService {
     		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     	} else {
     		currentUser.setName(user.getName());
+    		currentUser.setPhone1(user.getPhone1());
+    		currentUser.setPhone2(user.getPhone2());
+    		currentUser.setAdress(user.getAdress());
+    		currentUser.setEmail(user.getEmail());
+    		currentUser.setUserName(user.getUserName());
+    		currentUser.setPassword(user.getPassword());
+    		currentUser.setTasks(user.getTasks());
     		repository.save(currentUser);
     		return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     	}

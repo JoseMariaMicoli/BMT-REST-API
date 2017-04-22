@@ -1,46 +1,62 @@
 package com.micoli.backend.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Table(name = "users")
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "user_id")
 	private Long id;
 	
+	@Column(name = "user_name")
 	private String name;
 	
+	@Column(name = "user_phone1")
 	private String phone1;
 	
+	@Column(name = "user_phone2")
 	private String phone2;
 	
-	private String adress;
+	@Column(name = "user_address")
+	private String address;
 	
+	@Column(name = "user_email")
 	private String email;
 	
-	private String userName;
+	@Column(name = "user_nick")
+	private String nick;
 	
+	@Column(name = "user_password")
 	private String password;
-
-	public User(Long id, String fullName, String phone1, String phone2, String adress, String email, String userName,
-			String password) {
-		super();
-		this.id = id;
-		this.name = fullName;
-		this.phone1 = phone1;
-		this.phone2 = phone2;
-		this.adress = adress;
-		this.email = email;
-		this.userName = userName;
-		this.password = password;
-	}
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonBackReference
+	@JoinTable(name = "users_tasks",
+		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "task_id"))
+	private Set<Task> tasks = new HashSet<Task>();
 	
 	//for JPA!!!
-	public User() {}
+	public User() {
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -75,11 +91,11 @@ public class User {
 	}
 
 	public String getAdress() {
-		return adress;
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAdress(String address) {
+		this.address = address;
 	}
 
 	public String getEmail() {
@@ -91,11 +107,11 @@ public class User {
 	}
 
 	public String getUserName() {
-		return userName;
+		return nick;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String nick) {
+		this.nick = nick;
 	}
 
 	public String getPassword() {
@@ -104,6 +120,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
 	}
 	
 	
