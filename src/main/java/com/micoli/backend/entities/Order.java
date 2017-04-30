@@ -16,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "orders")
@@ -51,7 +49,6 @@ public class Order {
 	private User user;
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 	private Set<Product> products = new HashSet<Product>();
 	
 	public Order() {
