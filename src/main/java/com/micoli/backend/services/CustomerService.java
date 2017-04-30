@@ -17,7 +17,7 @@ import com.micoli.backend.repositories.CustomerRepository;
 public class CustomerService {
 	
 	@Autowired
-	CustomerRepository repository;
+	private CustomerRepository repository;
 	
 	public ResponseEntity<Collection<Customer>> getAllCustomers() {
 		return new ResponseEntity<>((Collection<Customer>) repository.findAll(), HttpStatus.OK);

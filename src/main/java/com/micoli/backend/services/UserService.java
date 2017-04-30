@@ -17,7 +17,7 @@ import com.micoli.backend.repositories.UserRepository;
 public class UserService {
 	
 	@Autowired
-	UserRepository repository;
+	private UserRepository repository;
 	
 	public ResponseEntity<Collection<User>> getAllUsers() {
 		return new ResponseEntity<>((Collection<User>) repository.findAll(), HttpStatus.OK);
