@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +29,10 @@ public class Product {
 	
 	@Column(name = "product_price")
 	private double price;
+
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private Order order;
 	
 	//For JPA/Hibernate
 	public Product() {

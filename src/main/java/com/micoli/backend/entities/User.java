@@ -12,9 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "users")
@@ -52,6 +55,10 @@ public class User {
 		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "task_id"))
 	private Set<Task> tasks = new HashSet<Task>();
+	
+	@OneToMany(mappedBy= "user",cascade = CascadeType.ALL)
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	private Set<Order> orders = new HashSet<Order>();
 	
 	//for JPA!!!
 	public User() {
@@ -129,7 +136,14 @@ public class User {
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
-	
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
 	
 
 }

@@ -47,13 +47,13 @@ public class CustomerController {
 	    
 	    //Update Existing Customer - UPDATE
 	    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-	    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody Customer customer) {
+	    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody Customer customer) {
 	    	return service.updateCustomer(id, customer);
 	    }
 	    
 	    //Delete Existing Customer - DELETE
 	    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-	    public ResponseEntity<?> deleteCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
+	    public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id, @RequestBody Customer customer) {
 	    	return service.deleteCustomer(id, customer);
 	    }
 	

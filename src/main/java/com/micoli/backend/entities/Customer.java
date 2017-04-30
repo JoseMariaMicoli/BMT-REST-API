@@ -1,13 +1,19 @@
 package com.micoli.backend.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "customers")
@@ -35,6 +41,10 @@ public class Customer {
 	
 	@Column(name = "customer_email")
 	private String email;
+	
+	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	private Set<Order> orders = new HashSet<Order>();
 	
 	//For JPA/Hibernate
 	public Customer() {
@@ -96,7 +106,14 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
 	
 
 }

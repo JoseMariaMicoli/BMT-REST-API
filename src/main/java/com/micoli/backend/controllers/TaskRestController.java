@@ -21,7 +21,7 @@ public class TaskRestController {
 	@Autowired
 	private TaskService service;
 	
-	//Get All Tasks - READ
+		//Get All Tasks - READ
 		@RequestMapping(method = RequestMethod.GET)
 		public ResponseEntity<Collection<Task>> getAllUsers() {
 			return service.getAllTasks();

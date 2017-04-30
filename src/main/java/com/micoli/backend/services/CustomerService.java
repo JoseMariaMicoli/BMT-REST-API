@@ -36,7 +36,7 @@ public class CustomerService {
         return new ResponseEntity<>(repository.save(input), HttpStatus.CREATED);
     }
 	
-	public ResponseEntity<?> updateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
+	public ResponseEntity<?> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer) {
     	Customer currentCustomer = repository.findOne(id);
     	
     	if(currentCustomer == null) {
@@ -53,7 +53,7 @@ public class CustomerService {
     	}
     }
 	
-	public ResponseEntity<?> deleteCustomer(@PathVariable("id") long id, @RequestBody Customer user) {
+	public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id, @RequestBody Customer user) {
     	Customer currentCustomer = repository.findOne(id);
     	
     	if(currentCustomer == null) {
