@@ -46,6 +46,7 @@ public class ProductService {
     		currentProduct.setDescription(product.getDescription());
     		currentProduct.setQuantity(product.getQuantity());
     		currentProduct.setPrice(product.getPrice());
+    		currentProduct.setOrders(product.getOrders());
     		repository.save(currentProduct);
     		return new ResponseEntity<Product>(currentProduct, HttpStatus.OK);
     	}

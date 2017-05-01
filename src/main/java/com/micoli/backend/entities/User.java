@@ -65,6 +65,21 @@ public class User {
 		
 	}
 
+	public User(Long id, String name, String phone1, String phone2, String address, String email, String nick,
+			String password, Set<Task> tasks, Set<Order> orders) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phone1 = phone1;
+		this.phone2 = phone2;
+		this.address = address;
+		this.email = email;
+		this.nick = nick;
+		this.password = password;
+		this.tasks = tasks;
+		this.orders = orders;
+	}
+
 	public Long getId() {
 		return id;
 	}

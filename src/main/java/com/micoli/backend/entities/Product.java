@@ -1,16 +1,20 @@
 package com.micoli.backend.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "products")
@@ -33,14 +37,26 @@ public class Product {
 	@Column(name = "product_price")
 	private double price;
 
-	@ManyToOne
-	@JoinColumn(name = "order_id")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-	private Order order;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonBackReference
+	@JoinTable(name = "products_orders",
+		joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "product_id"),
+		inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "order_id"))
+	private Set<Order> orders = new HashSet<Order>() ;
 	
 	//For JPA/Hibernate
 	public Product() {
 		
+	}
+
+	public Product(Long id, String name, String description, int quantity, double price, Set<Order> orders) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.quantity = quantity;
+		this.price = price;
+		this.orders = orders;
 	}
 
 	public Long getId() {
@@ -81,6 +97,14 @@ public class Product {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
 	
 	

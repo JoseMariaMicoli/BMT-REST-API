@@ -51,6 +51,19 @@ public class Customer {
 		
 	}
 
+	public Customer(Long id, String name, String address1, String address2, String phone1, String phone2, String email,
+			Set<Order> orders) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.phone1 = phone1;
+		this.phone2 = phone2;
+		this.email = email;
+		this.orders = orders;
+	}
+
 	public Long getId() {
 		return id;
 	}

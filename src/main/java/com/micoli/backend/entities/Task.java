@@ -47,6 +47,16 @@ public class Task {
 	public Task() {
 		
 	}
+	
+	public Task(Long id, String name, String description, boolean status, Date date, Set<User> users) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.status = status;
+		this.date = date;
+		this.users = users;
+	}
 
 	public Long getId() {
 		return id;

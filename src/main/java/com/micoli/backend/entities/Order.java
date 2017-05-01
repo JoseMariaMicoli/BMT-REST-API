@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -48,11 +48,27 @@ public class Order {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@ManyToMany
+	@JoinTable(name = "products_orders", 
+	joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "order_id"), 
+	inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "product_id"))
 	private Set<Product> products = new HashSet<Product>();
 	
 	public Order() {
 		
+	}
+
+	public Order(Long id, String status, Date date, Date deliveryDate, double total, Customer customer, User user,
+			Set<Product> products) {
+		super();
+		this.id = id;
+		this.status = status;
+		this.date = date;
+		this.deliveryDate = deliveryDate;
+		this.total = total;
+		this.customer = customer;
+		this.user = user;
+		this.products = products;
 	}
 
 	public Long getId() {

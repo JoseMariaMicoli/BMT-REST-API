@@ -50,6 +50,7 @@ public class UserService {
     		currentUser.setUserName(user.getUserName());
     		currentUser.setPassword(user.getPassword());
     		currentUser.setTasks(user.getTasks());
+    		currentUser.setOrders(user.getOrders());
     		repository.save(currentUser);
     		return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     	}
