@@ -60,13 +60,17 @@ public class User {
 	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 	private Set<Order> orders = new HashSet<Order>();
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	private Set<Interview> interviews = new HashSet<Interview>();
+	
 	//for JPA!!!
 	public User() {
 		
 	}
 
 	public User(Long id, String name, String phone1, String phone2, String address, String email, String nick,
-			String password, Set<Task> tasks, Set<Order> orders) {
+			String password, Set<Task> tasks, Set<Order> orders, Set<Interview> interviews) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -78,6 +82,7 @@ public class User {
 		this.password = password;
 		this.tasks = tasks;
 		this.orders = orders;
+		this.interviews = interviews;
 	}
 
 	public Long getId() {
@@ -112,11 +117,11 @@ public class User {
 		this.phone2 = phone2;
 	}
 
-	public String getAdress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAdress(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
@@ -128,11 +133,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getUserName() {
+	public String getNick() {
 		return nick;
 	}
 
-	public void setUserName(String nick) {
+	public void setNick(String nick) {
 		this.nick = nick;
 	}
 
@@ -159,6 +164,14 @@ public class User {
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
-	
 
+	public Set<Interview> getInterviews() {
+		return interviews;
+	}
+
+	public void setInterviews(Set<Interview> interviews) {
+		this.interviews = interviews;
+	}
+
+	
 }

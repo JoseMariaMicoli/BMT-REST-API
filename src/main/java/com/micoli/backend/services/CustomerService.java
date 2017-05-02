@@ -49,12 +49,13 @@ public class CustomerService {
     		currentCustomer.setAddress2(customer.getAddress2());
     		currentCustomer.setEmail(customer.getEmail());
     		currentCustomer.setOrders(customer.getOrders());
+    		currentCustomer.setInterviews(customer.getInterviews());
     		repository.save(currentCustomer);
     		return new ResponseEntity<Customer>(currentCustomer, HttpStatus.OK);
     	}
     }
 	
-	public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id, @RequestBody Customer user) {
+	public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id, @RequestBody Customer customer) {
     	Customer currentCustomer = repository.findOne(id);
     	
     	if(currentCustomer == null) {

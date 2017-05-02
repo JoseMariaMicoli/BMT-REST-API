@@ -16,56 +16,62 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "candidates")
+public class Candidate {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "customer_id")
+	@Column(name = "candidate_id")
 	private Long id;
 	
-	@Column(name = "customer_name")
+	@Column(name = "candidate_name")
 	private String name;
 	
-	@Column(name = "customer_address1")
-	private String address1;
+	@Column(name = "candidate_last_name")
+	private String lastName;
 	
-	@Column(name = "customer_address2")
-	private String address2;
+	@Column(name = "candidate_dni")
+	private int dni;
 	
-	@Column(name = "customer_phone1")
+	@Column(name = "candidate_phone1")
 	private String phone1;
 	
-	@Column(name = "customer_phone2")
+	@Column(name = "candidate_phone2")
 	private String phone2;
 	
-	@Column(name = "customer_email")
+	@Column(name = "candidate_email")
 	private String email;
 	
-	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-	private Set<Order> orders = new HashSet<Order>();
+	@Column(name = "candidate_role")
+	private String role;
 	
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-	private Set<Interview> interviews = new HashSet<Interview>();
+	@Column(name = "candidate_seniority")
+	private String seniority;
 	
-	//For JPA/Hibernate
-	public Customer() {
+	@Column(name = "candidate_status")
+	private String status;
+	
+	@OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL)
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	private Set<Interview> interviews =  new HashSet<Interview>();
+	
+	public Candidate() {
 		
 	}
 
-	public Customer(Long id, String name, String address1, String address2, String phone1, String phone2, String email,
-			Set<Order> orders, Set<Interview> interviews) {
+	public Candidate(Long id, String name, String lastName, int dni, String phone1, String phone2, String email,
+			String role, String seniority, String status, Set<Interview> interviews) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.address1 = address1;
-		this.address2 = address2;
+		this.lastName = lastName;
+		this.dni = dni;
 		this.phone1 = phone1;
 		this.phone2 = phone2;
 		this.email = email;
-		this.orders = orders;
+		this.role = role;
+		this.seniority = seniority;
+		this.status = status;
 		this.interviews = interviews;
 	}
 
@@ -85,20 +91,20 @@ public class Customer {
 		this.name = name;
 	}
 
-	public String getAddress1() {
-		return address1;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setAddress1(String address1) {
-		this.address1 = address1;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getAddress2() {
-		return address2;
+	public int getDni() {
+		return dni;
 	}
 
-	public void setAddress2(String address2) {
-		this.address2 = address2;
+	public void setDni(int dni) {
+		this.dni = dni;
 	}
 
 	public String getPhone1() {
@@ -125,12 +131,28 @@ public class Customer {
 		this.email = email;
 	}
 
-	public Set<Order> getOrders() {
-		return orders;
+	public String getRole() {
+		return role;
 	}
 
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getSeniority() {
+		return seniority;
+	}
+
+	public void setSeniority(String seniority) {
+		this.seniority = seniority;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Set<Interview> getInterviews() {
@@ -140,7 +162,7 @@ public class Customer {
 	public void setInterviews(Set<Interview> interviews) {
 		this.interviews = interviews;
 	}
-	
+
 	
 
 }

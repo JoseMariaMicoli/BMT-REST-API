@@ -45,12 +45,13 @@ public class UserService {
     		currentUser.setName(user.getName());
     		currentUser.setPhone1(user.getPhone1());
     		currentUser.setPhone2(user.getPhone2());
-    		currentUser.setAdress(user.getAdress());
+    		currentUser.setAddress(user.getAddress());
     		currentUser.setEmail(user.getEmail());
-    		currentUser.setUserName(user.getUserName());
+    		currentUser.setNick(user.getNick());
     		currentUser.setPassword(user.getPassword());
     		currentUser.setTasks(user.getTasks());
     		currentUser.setOrders(user.getOrders());
+    		currentUser.setInterviews(currentUser.getInterviews());
     		repository.save(currentUser);
     		return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     	}
