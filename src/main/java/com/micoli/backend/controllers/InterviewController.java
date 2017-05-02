@@ -28,7 +28,7 @@ public class InterviewController {
 			
 			//Get Interview by Id - Query
 			@RequestMapping(method = RequestMethod.GET, value = "/{id}")
-		    public ResponseEntity<Interview> getUserWithId(@PathVariable Long id) {
+		    public ResponseEntity<Interview> getInterviewWithId(@PathVariable Long id) {
 		        return service.getInterviewWithId(id);
 		    }
 

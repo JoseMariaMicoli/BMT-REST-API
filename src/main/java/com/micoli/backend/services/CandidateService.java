@@ -50,6 +50,7 @@ public class CandidateService {
     		currentCandidate.setRole(candidate.getSeniority());
     		currentCandidate.setDni(candidate.getDni());
     		currentCandidate.setInterviews(candidate.getInterviews());
+    		currentCandidate.setPositions(candidate.getPositions());
     		repository.save(currentCandidate);
     		return new ResponseEntity<Candidate>(currentCandidate, HttpStatus.OK);
     	}

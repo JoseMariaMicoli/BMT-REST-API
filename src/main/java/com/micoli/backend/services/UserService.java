@@ -52,6 +52,7 @@ public class UserService {
     		currentUser.setTasks(user.getTasks());
     		currentUser.setOrders(user.getOrders());
     		currentUser.setInterviews(currentUser.getInterviews());
+    		currentUser.setPositions(user.getPositions());
     		repository.save(currentUser);
     		return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     	}

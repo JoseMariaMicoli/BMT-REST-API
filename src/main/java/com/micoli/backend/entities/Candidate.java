@@ -9,9 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -55,12 +59,19 @@ public class Candidate {
 	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 	private Set<Interview> interviews =  new HashSet<Interview>();
 	
+	@ManyToMany
+	@JsonBackReference
+	@JoinTable(name = "candidates_positions",
+		joinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "candidate_id"),
+		inverseJoinColumns = @JoinColumn(name = "position_id", referencedColumnName = "position_id"))
+	private Set<Position> positions = new HashSet<Position>();
+	
 	public Candidate() {
 		
 	}
 
 	public Candidate(Long id, String name, String lastName, int dni, String phone1, String phone2, String email,
-			String role, String seniority, String status, Set<Interview> interviews) {
+			String role, String seniority, String status, Set<Interview> interviews, Set<Position> positions) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -73,6 +84,7 @@ public class Candidate {
 		this.seniority = seniority;
 		this.status = status;
 		this.interviews = interviews;
+		this.positions = positions;
 	}
 
 	public Long getId() {
@@ -163,6 +175,12 @@ public class Candidate {
 		this.interviews = interviews;
 	}
 
-	
+	public Set<Position> getPositions() {
+		return positions;
+	}
+
+	public void setPositions(Set<Position> positions) {
+		this.positions = positions;
+	}
 
 }

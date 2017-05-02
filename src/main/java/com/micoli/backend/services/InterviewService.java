@@ -37,12 +37,12 @@ public class InterviewService {
     	if(currentInterview == null) {
     		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     	} else {
-    		currentInterview.setPosition(interview.getPosition());
     		currentInterview.setDate(interview.getDate());
     		currentInterview.setCandidate(interview.getCandidate());
     		currentInterview.setCustomer(interview.getCustomer());
     		currentInterview.setUser(interview.getUser());
     		currentInterview.setComments(interview.getComments());
+    		currentInterview.setPosition(interview.getPosition());
     		repository.save(currentInterview);
     		return new ResponseEntity<Interview>(currentInterview, HttpStatus.OK);
     	}

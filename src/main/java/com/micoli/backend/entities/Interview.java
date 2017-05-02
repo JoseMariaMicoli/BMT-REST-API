@@ -20,9 +20,6 @@ public class Interview {
 	@Column(name = "interview_id")
 	private Long id;
 	
-	@Column(name = "interview_position")
-	private String position;
-	
 	@Column(name = "interview_date")
 	private Date date;
 	
@@ -41,20 +38,24 @@ public class Interview {
 	@JoinColumn(name = "candidate_id")
 	private Candidate candidate;
 	
+	@ManyToOne
+	@JoinColumn(name = "position_id")
+	private Position position;
+	
 	public Interview() {
 		
 	}
 
-	public Interview(Long id, String position, Date date, String comments, Customer customer, User user,
-			Candidate candidate) {
+	public Interview(Long id, Date date, String comments, Customer customer, User user,
+			Candidate candidate, Position position) {
 		super();
 		this.id = id;
-		this.position = position;
 		this.date = date;
 		this.comments = comments;
 		this.customer = customer;
 		this.user = user;
 		this.candidate = candidate;
+		this.position = position;
 	}
 
 	public Long getId() {
@@ -63,14 +64,6 @@ public class Interview {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getPosition() {
-		return position;
-	}
-
-	public void setPosition(String position) {
-		this.position = position;
 	}
 
 	public Date getDate() {
@@ -111,6 +104,14 @@ public class Interview {
 
 	public void setCandidate(Candidate candidate) {
 		this.candidate = candidate;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 	
 	
