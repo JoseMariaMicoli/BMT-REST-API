@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.micoli.backend.entities.Interview;
 import com.micoli.backend.services.InterviewService;
 
+@CrossOrigin(origins = "http://127.0.0.1:4200")
 @RestController
 @RequestMapping("api/interviews")
 public class InterviewController {
